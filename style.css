@@ -5,208 +5,464 @@ padding:0;
 }
 
 body{
-font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP",sans-serif;
-color:#ddd;
-background:#05080c;
+
+font-family:"Noto Sans JP",sans-serif;
+
+color:#e6f7ff;
+
+background:
+linear-gradient(
+130deg,
+#020b14,
+#071a2a,
+#021018,
+#000
+);
+
+background-size:400% 400%;
+
+animation:bgmove 25s ease infinite;
+
 min-height:100vh;
-position:relative;
-overflow-x:hidden;
+
 }
 
-/* ===== リアル工業歯車背景 ===== */
+@keyframes bgmove{
 
-body::before,
-body::after{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:-1;
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+
 }
 
-/* ===== レイヤー1（奥・遅い） ===== */
-
-body::before{
-background:
-url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>\
-<g fill='%23222'>\
-<circle cx='100' cy='100' r='55'/>\
-</g>\
-<g stroke='%23444' stroke-width='10'>\
-<circle cx='100' cy='100' r='40' fill='none'/>\
-</g>\
-</svg>") 15% 20%/420px no-repeat,
-url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>\
-<g fill='%23282828'>\
-<circle cx='100' cy='100' r='50'/>\
-</g>\
-<g stroke='%23555' stroke-width='8'>\
-<circle cx='100' cy='100' r='35' fill='none'/>\
-</g>\
-</svg>") 75% 70%/360px no-repeat;
-
-animation:gearSlow 90s linear infinite;
-filter:blur(2px);
-opacity:.35;
-}
-
-/* ===== レイヤー2（中間） ===== */
-
-body::after{
-background:
-url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>\
-<g fill='%23303030'>\
-<circle cx='100' cy='100' r='45'/>\
-</g>\
-<g stroke='%23666' stroke-width='8'>\
-<circle cx='100' cy='100' r='30' fill='none'/>\
-</g>\
-</svg>") 40% 30%/260px no-repeat,
-url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>\
-<g fill='%23262626'>\
-<circle cx='100' cy='100' r='35'/>\
-</g>\
-<g stroke='%23777' stroke-width='6'>\
-<circle cx='100' cy='100' r='20' fill='none'/>\
-</g>\
-</svg>") 70% 40%/200px no-repeat;
-
-animation:gearFast 35s linear infinite reverse;
-opacity:.55;
-}
-
-/* ===== 回転アニメーション ===== */
-
-@keyframes gearSlow{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
-@keyframes gearFast{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(-360deg);}
-}
-
-/* ===== 既存UIそのまま ===== */
+/* ===== ヘッダー ===== */
 
 .header{
+
 position:fixed;
 top:0;
 left:0;
 right:0;
+
 height:65px;
+
 display:flex;
 align-items:center;
 justify-content:center;
-background:linear-gradient(#05080c,#000);
-border-bottom:1px solid #ff8800;
-box-shadow:0 0 15px #ff880033,inset 0 -1px 0 #ff880055;
+
+background:#02131d;
+
+border-bottom:1px solid #00eaff55;
+
+box-shadow:0 0 40px #00eaff44;
+
 z-index:100;
+
 }
 
 .logoText{
-font-size:22px;
-font-weight:700;
-letter-spacing:4px;
-color:#ff8800;
-text-shadow:0 0 6px #ff8800aa;
+
+font-size:24px;
+font-weight:bold;
+
+background:linear-gradient(90deg,#00eaff,#00b3ff);
+
+-webkit-background-clip:text;
+color:transparent;
+
 }
+
+/* ===== レイアウト ===== */
 
 .container{
+
 max-width:1400px;
 margin:80px auto;
-padding:20px;
+padding:15px;
 display:flex;
 gap:20px;
+
 }
+
+/* ===== パネル ===== */
 
 .panel{
-background:linear-gradient(180deg,#0a0f14,#05080c);
-border-radius:12px;
+
+position:relative;
+
+background:rgba(0,20,40,.75);
+
+border-radius:18px;
+
 padding:16px;
-border:1px solid #ff880044;
-box-shadow:0 0 15px #000 inset,0 0 20px #000;
+
+overflow:hidden;
+
+backdrop-filter:blur(10px);
+
+box-shadow:
+0 0 40px #00eaff22;
+
 }
 
-.categories{width:230px;}
-.products{width:420px;}
-.detail{flex:1;}
+/* ===== ガラスネオン枠 ===== */
+
+.panel::before{
+
+content:"";
+position:absolute;
+inset:-2px;
+
+background:
+linear-gradient(
+60deg,
+#00eaff,
+#008cff,
+#00eaff
+);
+
+background-size:300%;
+animation:neonMove 6s linear infinite;
+
+filter:blur(8px);
+z-index:-1;
+
+}
+
+@keyframes neonMove{
+0%{background-position:0%;}
+100%{background-position:300%;}
+}
+
+/* ===== 幅（変更なし） ===== */
+
+.categories{
+width:260px;
+min-width:260px;
+max-width:260px;
+overflow-x:auto;
+overflow-y:hidden;
+padding-bottom:10px;
+}
+
+.products{
+width:420px;
+min-width:420px;
+}
+
+.detail{
+flex:1;
+min-width:300px;
+}
+
+/* ===== カテゴリ ===== */
+
+#categoryList{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+}
 
 .categoryBtn{
-padding:10px 14px;
-margin:6px 0;
+
+flex:0 0 auto;
+min-width:150px;
+
 cursor:pointer;
-border-radius:8px;
-background:linear-gradient(#0f1620,#0a1118);
-border:1px solid #ff880033;
+
+border-radius:12px;
+
+background:rgba(0,30,60,.6);
+
+border:1px solid #00eaff33;
+
 display:flex;
 align-items:center;
-gap:10px;
+gap:8px;
+
+padding:10px;
+
+transition:.25s;
+
 }
+
+.categoryBtn:hover{
+
+background:rgba(0,60,100,.8);
+
+box-shadow:
+0 0 25px #00eaff66;
+
+transform:translateY(-2px);
+
+}
+
+/* 小さいカテゴリ画像 */
 
 .categoryBtn img{
-width:32px;
-height:32px;
-object-fit:cover;
+
+width:28px;
+height:28px;
+
 border-radius:6px;
+
+object-fit:cover;
+
+border:1px solid #00eaff66;
+
 }
 
-.card{
-display:flex;
-gap:12px;
-padding:12px;
+/* ===== 検索 ===== */
+
+#searchBox{
+
+width:100%;
+padding:14px;
 margin-bottom:12px;
+
+background:#02131d;
+
+border:1px solid #00eaff66;
+
+color:#00eaff;
+
+border-radius:12px;
+
+outline:none;
+
+}
+
+#searchBox:focus{
+box-shadow:0 0 15px #00eaff88;
+}
+
+/* ===== 商品カード ===== */
+
+.card{
+
+display:flex;
+gap:14px;
+padding:16px;
+margin-bottom:12px;
+
 cursor:pointer;
-border-radius:10px;
-background:linear-gradient(#0b1218,#060b10);
-border:1px solid #ff880033;
+
+border-radius:12px;
+
+background:
+linear-gradient(
+180deg,
+#02131d,
+#010b12
+);
+
+border:1px solid #00eaff33;
+
+transition:.25s;
+
+}
+
+.card:hover{
+
+background:
+linear-gradient(
+180deg,
+#042c44,
+#02131d
+);
+
+border:1px solid #00eaff;
+
+box-shadow:
+0 0 25px #00eaff88;
+
+transform:translateY(-2px);
+
 }
 
 .card img{
+
 width:90px;
 height:90px;
+
+border-radius:10px;
+
 object-fit:cover;
-border-radius:8px;
+
+border:1px solid #00eaff66;
+
 }
 
 .title{
 font-size:16px;
-font-weight:700;
+font-weight:bold;
+color:#ffffff;
 }
+
+/* ===== 説明 ===== */
 
 .desc{
-white-space:normal;
-line-height:1.7;
+white-space:pre-line;
+line-height:1.8;
+color:#cceeff;
 }
 
+/* ===== 詳細 ===== */
+
+.detail{
+min-height:500px;
+}
+
+/* はみ出し防止 */
+
+.detail img{
+
+max-width:100%;
+height:auto;
+
+display:block;
+
+margin-top:15px;
+
+border-radius:12px;
+
+border:1px solid #00eaff66;
+
+}
+
+.detail iframe{
+
+width:100%;
+height:350px;
+
+margin-top:15px;
+
+border-radius:12px;
+
+border:1px solid #00eaff66;
+
+}
+
+/* ===== モーダル ===== */
+
 .modal{
+
 position:fixed;
 top:0;
 left:0;
+
 width:100%;
 height:100%;
-background:#000;
-padding:40px;
+
+background:
+linear-gradient(
+180deg,
+#010b12,
+#000
+);
+
+padding:30px;
+
 display:none;
 overflow:auto;
+
 z-index:9999;
+
+}
+
+.modal img{
+max-width:100%;
+height:auto;
+margin-top:20px;
+border-radius:12px;
+border:1px solid #00eaff66;
 }
 
 .modal iframe{
 width:100%;
 height:420px;
+margin-top:20px;
+border-radius:12px;
+border:1px solid #00eaff66;
 }
 
+/* 閉じるボタン */
+
+.closeBtn{
+
+margin-bottom:20px;
+padding:12px 24px;
+
+border-radius:12px;
+
+border:1px solid #00eaff;
+
+background:#02131d;
+
+color:#00eaff;
+
+cursor:pointer;
+
+font-size:16px;
+
+transition:.2s;
+
+}
+
+.closeBtn:hover{
+box-shadow:0 0 20px #00eaff;
+}
+
+/* ===== スクロールバー ===== */
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#00eaff;
+border-radius:10px;
+}
+
+/* ===== スマホ ===== */
+
 @media(max-width:700px){
-.container{flex-direction:column;margin-top:70px;}
-.categories,.products{width:100%;}
-.detail{display:none;}
-.modal iframe{height:250px;}
+
+.container{
+flex-direction:column;
+margin-top:70px;
+}
+
+.categories,
+.products{
+width:100%;
+min-width:100%;
+max-width:100%;
+}
+
+.categories{
+overflow-x:auto;
+overflow-y:hidden;
+}
+
+#categoryList{
+display:flex;
+flex-wrap:nowrap;
+gap:12px;
+padding-bottom:10px;
+}
+
+.categoryBtn{
+flex:0 0 auto;
+min-width:140px;
+}
+
+.detail{
+display:none;
+}
+
+.modal iframe{
+height:250px;
+}
+
 }
